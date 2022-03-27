@@ -2,4 +2,4 @@ from django.shortcuts import render
 
 
 def record(request):
-    pass
+    return render(request, "AudioProcessing/index.html")

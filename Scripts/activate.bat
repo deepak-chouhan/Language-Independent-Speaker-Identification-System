@@ -1,6 +1,6 @@
 @echo off
 
-set "VIRTUAL_ENV=C:\Users\dcdeepakdc\Downloads\MP4\Language-Independent-Speaker-Identification-System\Language-Independent-Speaker-Identification-System"
+set "VIRTUAL_ENV=D:\MP4\System\Language-Independent-Speaker-Identification-System"
 
 if defined _OLD_VIRTUAL_PROMPT (
     set "PROMPT=%_OLD_VIRTUAL_PROMPT%"

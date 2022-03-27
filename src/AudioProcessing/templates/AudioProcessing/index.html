@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Speaker
+{% endblock title %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'AudioProcessing/styles.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+{% endblock styles %}
+
+{% block content %}
+    <div class="hero">
+        <div class="heading">
+            <h1>Language Independent Speaker Indentification System</h1>
+        </div>
+        <div class="record">
+            <div class="btn">
+                <i class='bx bx-microphone'></i>
+                <p>Record Audio</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

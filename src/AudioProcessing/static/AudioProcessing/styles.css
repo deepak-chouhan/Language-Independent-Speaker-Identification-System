@@ -1,0 +1,43 @@
+:root{
+    --grey: #c6ccd8;
+}
+.hero{
+    margin: auto;
+    width: 90vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 50px;
+}
+
+.heading h1{
+    font-size: 3.5rem;
+    color: var(--grey);
+}
+
+.record{
+    display: grid;
+    justify-content: center;
+}
+
+.record .btn{
+    width: 100%;
+    border: 1px solid var(--grey);
+    border-radius: 500px;
+    padding: 50px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.record .btn p{
+    font-size: 1.6rem;
+    color: var(--grey);
+}
+
+.record .bx-microphone{
+    font-size: 4rem;
+    color: var(--grey);
+}
