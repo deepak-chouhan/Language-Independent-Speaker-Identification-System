@@ -8,6 +8,8 @@ $(document).ready(() => {
         fileReader.onloadend = () => {
             let myArrayBuffer = fileReader.result;
             audioContext.decodeAudioData(myArrayBuffer, (audioBuffer) => {
+
+                // Send the buffer to server
                 console.log(audioBuffer)
             });
         };
