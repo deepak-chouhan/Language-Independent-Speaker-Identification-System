@@ -21,10 +21,13 @@
     justify-content: center;
 }
 
+
+
 .record .btn{
+    position: relative;
     width: 100%;
+    background-color: #23344e;
     border: 1px solid var(--grey);
-    background: none;
     border-radius: 500px;
     padding: 50px;
     gap: 15px;
@@ -39,6 +42,20 @@
     padding: 55px;
 }
 
+.clicked::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid var(--grey);
+    /* background-color: #c6ccd856; */
+    border-radius: 500px;
+    animation: pulse .8s infinite;
+}
+
 .record .btn p{
     font-size: 1.6rem;
     color: var(--grey);
@@ -47,4 +64,16 @@
 .record .bx-microphone, .record .bx-stop{
     font-size: 4rem;
     color: var(--grey);
+}
+
+@keyframes pulse{
+    0%{
+        transform: scaleX(1) scaleY(1);
+        opacity: 90%;
+    }
+
+    100%{
+        transform: scaleX(1.09) scaleY(1.18);
+        opacity: 0%;
+    }
 }
