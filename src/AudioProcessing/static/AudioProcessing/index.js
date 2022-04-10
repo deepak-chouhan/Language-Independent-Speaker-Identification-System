@@ -1,26 +1,9 @@
 $(document).ready(() => {
 
-    function convertBlobToAudioBuffer(myBlob) {
-
-        const audioContext = new AudioContext();
-        const fileReader = new FileReader();
-
-        fileReader.onloadend = () => {
-            let myArrayBuffer = fileReader.result;
-            audioContext.decodeAudioData(myArrayBuffer, (audioBuffer) => {
-
-                // Send the buffer to server
-                console.log(audioBuffer)
-            });
-        };
-
-        //Load blob
-        fileReader.readAsArrayBuffer(myBlob);
-    }
-
     async function doSomethingWithAudioBuffer(blob) {
         var arrayBuffer = await blob.arrayBuffer();
         // Do something with arrayBuffer;
+        console.log("doSomethingWithAudioBuffer()->")
         console.log(arrayBuffer);
       }
 
@@ -37,7 +20,6 @@ $(document).ready(() => {
                 var blob = new Blob(items, {
                     type: "audio/webm"
                 });
-                console.log(blob)
                 var audio = document.getElementById("audio");
                 var mainaudio = document.createElement("audio");
                 mainaudio.setAttribute("controls", "controls");
@@ -54,7 +36,6 @@ $(document).ready(() => {
                     });
                 };
 
-                // convertBlobToAudioBuffer(blob);
                 doSomethingWithAudioBuffer(blob);
 
             }
