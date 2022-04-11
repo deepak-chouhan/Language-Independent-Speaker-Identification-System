@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
     // converts the blob into base64 string
-    function getString(blob){
+    function getString(blob) {
         var reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
@@ -9,6 +9,13 @@ $(document).ready(() => {
 
             // logic to send the base64 string to server
             console.log(base64data);
+            $.post('http://127.0.0.1:8000/save', {
+                audio: JSON.stringify(base64data),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            }, function (response) {
+                console.log(response)
+            });
+
         }
     }
 
@@ -20,7 +27,7 @@ $(document).ready(() => {
         var recorder = new MediaRecorder(stream);
         recorder.ondataavailable = e => {
             items.push(e.data);
-            
+
             if (recorder.state == "inactive") {
                 var blob = new Blob(items, {
                     type: "audio/webm"
@@ -33,7 +40,7 @@ $(document).ready(() => {
                 audio.appendChild(mainaudio);
                 mainaudio.innerHTML = '<source src="' + URL.createObjectURL(blob) + '" type="video/webm"/>';
                 // -----------------------------
-                
+
                 // convert the blob to base64
                 getString(blob);
             }
