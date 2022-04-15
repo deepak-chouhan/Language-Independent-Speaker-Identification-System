@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+    {% block styles %}{% endblock styles %}
+</head>
+<body>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+        <div class="record">
+            <div class="audio" id="audio"></div>
+                <button id="record" class="btn">
+                    <i class='bx bx-microphone'></i>
+                    <p>Record Audio</p>
+                </button>
+            </div>
+        </div>
+
+        <hr>
+
+        <button type='submit'>submit</button>
+        </form>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static "AudioProcessing/newindex.js" %}"></script>
+</html>
+        
