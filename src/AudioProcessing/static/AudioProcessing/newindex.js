@@ -9,8 +9,8 @@ $(document).ready(() => {
 
             // logic to send the base64 string to server
             console.log(base64data);
-            $.post('http://127.0.0.1:8000/save', {
-                audio1: JSON.stringify(base64data),
+            $.post('http://127.0.0.1:8000/student', {
+                audio: JSON.stringify(base64data),
                 csrfmiddlewaretoken: '{{ csrf_token }}',
             }, function (response) {
                 console.log(response)
