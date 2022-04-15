@@ -10,9 +10,13 @@
 </head>
 <body>
     
-    <form method="post" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+
+        <input type="text" name="name" id="id_name" placeholder="name">
+        <input type="text" name="batch" id="id_batch" placeholder="batch">
+        <input type="text" name="roll_no" id="id_roll_no" placeholder="roll no">
     
         <div class="record">
             <div class="audio" id="audio"></div>
@@ -22,11 +26,9 @@
                 </button>
             </div>
         </div>
-
         <hr>
-
-        <button type='submit'>submit</button>
-        </form>
+        <button id="submit_btn">Submit</button>
+    </form>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static "AudioProcessing/newindex.js" %}"></script>

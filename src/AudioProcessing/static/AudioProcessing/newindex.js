@@ -1,20 +1,19 @@
 $(document).ready(() => {
 
+    var buffers = [];
+
+    // callback function for Filereader
+    function callback(data) {
+        buffers.push(data);
+        console.log(buffers)
+    }
+
     // converts the blob into base64 string
-    function getString(blob) {
+    function getString(blob, callback) {
         var reader = new FileReader();
         reader.readAsDataURL(blob);
         reader.onloadend = function () {
-            var base64data = reader.result;
-
-            // logic to send the base64 string to server
-            console.log(base64data);
-            $.post('http://127.0.0.1:8000/student', {
-                audio: JSON.stringify(base64data),
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-            }, function (response) {
-                console.log(response)
-            });
+            callback(JSON.stringify(reader.result))
         }
     }
 
@@ -40,8 +39,7 @@ $(document).ready(() => {
                 mainaudio.innerHTML = '<source src="' + URL.createObjectURL(blob) + '" type="video/webm"/>';
                 // -----------------------------
 
-                // convert the blob to base64
-                getString(blob);
+                getString(blob, callback);
             }
         }
 
@@ -63,4 +61,27 @@ $(document).ready(() => {
         });
     })
 
+    function sendToServer() {
+        var name = document.getElementById("id_name").value;
+        var batch = document.getElementById("id_batch").value;
+        var roll_no = document.getElementById("id_roll_no").value;
+
+        console.log("inSentToServer");
+
+        // logic to send the base64 string to server
+        $.post('http://127.0.0.1:8000/student', {
+            "name": name,
+            "batch": batch,
+            "roll_no": roll_no,
+            "audio" : buffers,
+        }, function (response) {
+            console.log(response)
+        });
+    }
+
+    var send_btn = document.getElementById("submit_btn")
+    $(send_btn).click(function (e) { 
+        e.preventDefault();
+        sendToServer();
+    });
 })
