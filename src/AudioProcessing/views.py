@@ -17,7 +17,6 @@ def save(request):
 
 @csrf_exempt          
 def Student_reg(request):
-    # form=Studentform()
     if request.method=="POST":
 
         # array of base64 string
@@ -27,24 +26,17 @@ def Student_reg(request):
         rollno=request.POST.getlist("roll_no")[0]
         newstudent=Student.objects.create(name=name,batch=batch,roll_no=rollno)
         newstudent.save()
+        i = 0
         for audio in audios:
             audio_data=base64.b64decode(audio)
-            string1="newsrc/"+str(rollno)+"__"+str(len(audio))+'.mp3'
+            string1="newsrc/" + str(rollno)+"__" + str(name) + "__" + str(i)+'.mp3'
+            i += 1
             print(string1)
+
+            # saving the file
             with open(string1,'wb') as aud:
                 aud.write(audio_data)
-            audioobj = Audio.objects.create(student_roll=rollno,audiofile=string1)
+            audioobj = Audio.objects.create(student_roll=rollno, audiofile=string1)
             audioobj.save
-        # print("123hey 34")
-        # if form.is_valid():
-        #     print("123hey 34")
-        #     form=Studentform(request.POST)
-        #     print("hey")
-        #     rollno= form.cleaned_data.get("roll_no")
-        #     form.save()
-        #     val=len(base64file)
-        #     audio = Audio.objects.create(student_roll=rollno,val=val)
-        #     audio.save()
-        # return JsonResponse({"resp": "handled"})
     return render(request,"AudioProcessing/student.html")
 
