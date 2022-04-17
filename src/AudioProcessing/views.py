@@ -12,8 +12,8 @@ def save(request):
     if request.method == "POST":
 
         # array of base64 string
-        audio = request.POST.getlist("audio[]")
-        return JsonResponse({"resp": "handled"})
+        audio = request.POST["audio"]
+        return JsonResponse({"resp": "handled", "data": audio})
 
 @csrf_exempt          
 def Student_reg(request):
