@@ -24,12 +24,16 @@ def Student_reg(request):
         name=(request.POST.getlist("name")[0])
         batch=request.POST.getlist("batch")[0]
         rollno=request.POST.getlist("roll_no")[0]
-        newstudent=Student.objects.create(name=name,batch=batch,roll_no=rollno)
+        newstudent=Student.objects.create(name=name, batch=batch, roll_no=rollno)
         newstudent.save()
         i = 0
+        
         for audio in audios:
+
             audio_data=base64.b64decode(audio)
-            string1="newsrc/" + str(rollno)+"__" + str(name) + "__" + str(i)+'.mp3'
+
+            # saves the file in <student_id>__<roll_no>__<name>__<file_number>.mp3 format
+            string1="newsrc/" + str(newstudent.id) + "__" + str(rollno)+ "__" + str(name) + "__" + str(i)+'.wav'
             i += 1
             print(string1)
 
