@@ -13,7 +13,14 @@ def save(request):
 
         # array of base64 string
         audio = request.POST["audio"]
-        return JsonResponse({"resp": "handled", "data": audio})
+        roll = 12344
+        teacher = "new teacher"
+        course = "new course"
+        student = Student.objects.filter(roll_no=roll)
+        print(student)
+        attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=teacher, course=course)
+        attendence_obj.save()
+        return JsonResponse({"response": "Attendence Marked"})
 
 @csrf_exempt          
 def Student_reg(request):
