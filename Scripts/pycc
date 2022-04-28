@@ -1,0 +1,3 @@
+#!D:\MP4\System\Language-Independent-Speaker-Identification-System\Scripts\python.exe
+from numba.pycc import main
+main()

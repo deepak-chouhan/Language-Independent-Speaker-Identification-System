@@ -1,26 +1,67 @@
-from django.shortcuts import render
+import re
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import *
 import base64
+from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.decorators import login_required
 
+from .helper import *
+
+def my_view(request):
+    cur_user = request.user
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("/rec")
+            
+        else:
+            print("none")
+    return render(request, "AudioProcessing/login.html")
+
+@login_required()
+def logout_view(request):
+    if request.method=="POST":
+        logout(request)
+        return redirect("/login")
+    return render(request, "AudioProcessing/logout.html")
+    
+        
+@login_required()
 def record(request):
     return render(request, "AudioProcessing/index.html")
 
 @csrf_exempt
 def save(request):
+    curuser=request.user;
     if request.method == "POST":
 
         # array of base64 string
         audio = request.POST["audio"]
         roll = 12344
-        teacher = "new teacher"
+        teacher = curuser
         course = "new course"
-        student = Student.objects.filter(roll_no=roll)
-        print(student)
-        attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=teacher, course=course)
-        attendence_obj.save()
-        return JsonResponse({"response": "Attendence Marked"})
+        
+        audio_data = base64.urlsafe_b64decode(audio)
+        path = "./media/" + "new_file" + ".wav"
+
+        # saving the file
+        audio_file = open(path, 'wb')
+        audio_file.write(audio_data)
+
+        # res = predict_speaker(path)
+        # print(res)
+
+        # student = Student.objects.filter(roll_no=roll)
+        # print(student)
+        # attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=str(teacher), course=course)
+        # attendence_obj.save()
+
+        return JsonResponse({"response": "Attendence Marked", "res": str(audio)})
 
 @csrf_exempt          
 def Student_reg(request):
@@ -40,7 +81,7 @@ def Student_reg(request):
             audio_data=base64.b64decode(audio)
 
             # saves the file in <student_id>__<roll_no>__<name>__<file_number>.mp3 format
-            string1="newsrc/" + str(newstudent.id) + "__" + str(rollno)+ "__" + str(name) + "__" + str(i)+'.wav'
+            string1="newsrc/" + str(newstudent.id) + "__" + str(rollno)+ "__" + str(name) + "__" + str(i) + '.wav'
             i += 1
             print(string1)
 
