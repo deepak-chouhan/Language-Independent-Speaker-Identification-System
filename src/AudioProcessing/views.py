@@ -42,26 +42,32 @@ def save(request):
 
         # array of base64 string
         audio = request.POST["audio"]
+        print(type(request.POST["audio"]))
+
+
         roll = 12344
         teacher = curuser
         course = "new course"
         
-        audio_data = base64.urlsafe_b64decode(audio)
-        path = "./media/" + "new_file" + ".wav"
+        audio_data = base64.b64decode(audio)
+        # path = "./media/" + "new_file" + ".mp3"
 
-        # saving the file
-        audio_file = open(path, 'wb')
-        audio_file.write(audio_data)
 
-        # res = predict_speaker(path)
-        # print(res)
+        # # saving the file
+        # audio_file = open(path, 'wb')
+        # audio_file.write(audio_data)
+
+        path = "./media/2193119.wav"
+
+        res = predict_speaker(path)
+        print(res)
 
         # student = Student.objects.filter(roll_no=roll)
         # print(student)
         # attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=str(teacher), course=course)
         # attendence_obj.save()
 
-        return JsonResponse({"response": "Attendence Marked", "res": str(audio)})
+        return JsonResponse({"response": "Attendence Marked", "res": audio})
 
 @csrf_exempt          
 def Student_reg(request):
