@@ -2,10 +2,13 @@ import os
 import pandas as pd
 import numpy as np
 import librosa
+import io
 import joblib
 import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
+
+from six.moves.urllib.request import urlopen
 
 
 def extract_feature(y, sr):
@@ -21,6 +24,7 @@ def predict_speaker(filename):
 
     # audio features
     audio, sr = librosa.load(filename, mono=True)
+
     audio, index = librosa.effects.trim(audio)
     
     # audio data

@@ -2,6 +2,7 @@ import re
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from requests import patch
 from .forms import *
 import base64
 from django.contrib.auth import authenticate, login,logout
@@ -42,19 +43,19 @@ def save(request):
 
         # array of base64 string
         audio = request.POST["audio"]
-        print(type(request.POST["audio"]))
 
+        # details
+        course = request.POST["course"]
+        batch = request.POST["batch"]
+        teacher = request.POST["teacher"]
+        print(course, batch, teacher)
 
-        roll = 12344
-        teacher = curuser
-        course = "new course"
-        
-        audio_data = base64.b64decode(audio)
-        # path = "./media/" + "new_file" + ".mp3"
+        # audio_data = base64.b64decode(audio)
+        # path = "./media/" + "new_file" + ".wav"
 
 
         # # saving the file
-        # audio_file = open(path, 'wb')
+        # audio_file = open(path, 'wb+')
         # audio_file.write(audio_data)
 
         path = "./media/2193119.wav"

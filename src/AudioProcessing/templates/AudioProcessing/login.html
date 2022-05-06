@@ -1,6 +1,93 @@
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <button type='submit'>submit</button>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background:#23344E;
+            display:grid;
+            place-items:center;
+            height:100vh;
+        }
+        form
+        {
+            display:flex;
+            flex-direction:column;
+            width:300px;
+            background:#fff;
+            padding:60px 40px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            border-radius:5px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        label
+        {
+            margin-bottom:8px
+        }
+        .box
+        {
+            margin-bottom:20px;
+            padding:10px;
+            border-radius:4px;
+            border:#23344E 1px solid;
+        }
+        span
+        {
+            margin-bottom:20px;
+        }
+        button
+        {
+            padding:10px 0;
+            border:none;
+            color:#E6EBF5;
+            background:#23344E;
+            border-radius:5px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+        }
+        .sp
+        {
+            margin-bottom:20px;
+            display: flex;
+            align-items: center;
+
+        }
+        #showPassword
+        {
+            margin-right:5px;
+        }
+    </style>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="username">Name</label>
+            <input type="text" name="username" id="username"/ class="box">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/ class="box">
+            <div class="sp">
+            <input type="checkbox" id="showPassword" >
+            Show password
+            </div>
+            <button type='submit'>Sign in</button>
+        </form>
+        <script>
+            document.getElementById('showPassword').onclick = function() {
+                if ( this.checked ) {
+                   document.getElementById('password').type = "text";
+                } else {
+                   document.getElementById('password').type = "password";
+                }
+            };
+        </script>
+    </body>
+</html>

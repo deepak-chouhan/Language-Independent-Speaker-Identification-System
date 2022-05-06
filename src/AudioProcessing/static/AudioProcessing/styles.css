@@ -11,6 +11,13 @@
     gap: 50px;
 }
 
+.heading{
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .heading h1{
     font-size: 3.5rem;
     color: var(--grey);
@@ -64,6 +71,22 @@
 .record .bx-microphone, .record .bx-stop{
     font-size: 4rem;
     color: var(--grey);
+}
+
+.lecture{
+    display: flex;
+    gap: 20px;
+}
+
+.lecture select{
+    font-size: 1rem;
+    padding: 15px 20px;
+    outline: none;
+    border: none;
+}
+
+.lecture option{
+    margin: 10px;
 }
 
 @keyframes pulse{
