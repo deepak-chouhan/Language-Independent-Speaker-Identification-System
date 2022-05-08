@@ -24,7 +24,6 @@ def predict_speaker(filename):
 
     # audio features
     audio, sr = librosa.load(filename, mono=True)
-
     audio, index = librosa.effects.trim(audio)
     
     # audio data

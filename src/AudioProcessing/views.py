@@ -1,4 +1,3 @@
-import re
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -41,40 +40,32 @@ def save(request):
     curuser=request.user;
     if request.method == "POST":
 
-        # array of base64 string
-        audio = request.POST["audio"]
-
         # details
         # course = request.POST["course"]
         # batch = request.POST["batch"]
         # teacher = request.POST["teacher"]
 
-        print("BODY")
-        print(request.body)
+        # array of base64 string
+        audio = request.POST["audio"]
+        audio = audio.split(",")[1]
 
-
-        # audio_data = base64.b64decode(audio)
-        path = "./media/" + "new_file"
-
-        f = open(f'{path}.wav', 'wb+')
-        f.write(request.body)
-        f.close()
-
+        path = "./media/new_file.wav"
+        audio_data = base64.urlsafe_b64decode(audio)
 
         # # saving the file
-        # audio_file = open(path, 'wb+')
-        # audio_file.write(audio_data)
+        audio_file = open(path, 'wb')
+        audio_file.write(audio_data)
 
-        # path = "./media/2193119.wav"
-        # res = predict_speaker(path)
-        # print(res)
+        # predicting student
+        res = predict_speaker(path)
+        print(res)
 
         # student = Student.objects.filter(roll_no=roll)
         # print(student)
         # attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=str(teacher), course=course)
         # attendence_obj.save()
 
-        return JsonResponse({"response": "Attendence Marked", "res": audio})
+        return JsonResponse({"response": "Attendence Marked", "res": str(res[0])})
 
 @csrf_exempt          
 def Student_reg(request):

@@ -31,7 +31,7 @@ $(document).ready(() => {
 
             if (recorder.state == "inactive") {
                 var blob = new Blob(items, {
-                    type: "audio/webm"
+                    'type' : 'audio/wav; codecs=MS_PCM' 
                 });
 
                 // display the audio on frontend
