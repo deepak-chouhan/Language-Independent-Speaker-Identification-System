@@ -45,23 +45,29 @@ def save(request):
         audio = request.POST["audio"]
 
         # details
-        course = request.POST["course"]
-        batch = request.POST["batch"]
-        teacher = request.POST["teacher"]
-        print(course, batch, teacher)
+        # course = request.POST["course"]
+        # batch = request.POST["batch"]
+        # teacher = request.POST["teacher"]
+
+        print("BODY")
+        print(request.body)
+
 
         # audio_data = base64.b64decode(audio)
-        # path = "./media/" + "new_file" + ".wav"
+        path = "./media/" + "new_file"
+
+        f = open(f'{path}.wav', 'wb+')
+        f.write(request.body)
+        f.close()
 
 
         # # saving the file
         # audio_file = open(path, 'wb+')
         # audio_file.write(audio_data)
 
-        path = "./media/2193119.wav"
-
-        res = predict_speaker(path)
-        print(res)
+        # path = "./media/2193119.wav"
+        # res = predict_speaker(path)
+        # print(res)
 
         # student = Student.objects.filter(roll_no=roll)
         # print(student)

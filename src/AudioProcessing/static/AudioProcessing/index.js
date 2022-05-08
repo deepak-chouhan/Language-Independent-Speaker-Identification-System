@@ -42,6 +42,17 @@ $(document).ready(() => {
                 // mainaudio.innerHTML = '<source src="' + URL.createObjectURL(blob) + '" type="video/webm"/>';
                 // -----------------------------
                 getString(blob);
+
+                // Send Blob
+                // var batch = document.getElementById("batch").value;
+                // var course = document.getElementById("course").value;
+                // var teacher = document.getElementById("teacher").value;
+
+                // fetch('http://127.0.0.1:8000/save', {
+                //     method: 'post',
+                //     body: blob,
+                // });
+
             }
         }
 
