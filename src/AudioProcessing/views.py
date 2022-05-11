@@ -30,10 +30,12 @@ def logout_view(request):
         return redirect("/login")
     return render(request, "AudioProcessing/logout.html")
     
-        
 @login_required()
 def record(request):
     return render(request, "AudioProcessing/index.html")
+
+def dashboard(request):
+    return render(request, "AudioProcessing/dashboard.html")
 
 @csrf_exempt
 def save(request):
