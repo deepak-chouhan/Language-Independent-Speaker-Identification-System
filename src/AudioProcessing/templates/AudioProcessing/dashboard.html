@@ -82,6 +82,7 @@
 <body>
     <div class="main">
         <form action="" method="post">
+            {% csrf_token %}
             <h3>Class Details</h3>
             <label for="batch">Batch</label>
             <select name="batch" id="batch" class="box">
@@ -102,7 +103,7 @@
             <button type='submit' class="dwn">Download</button>
         </form>
     </div>
-    <a href="" class="atnd">Schedule Attendance</a>
+    <a href="{% url 'record' %}" class="atnd">Schedule Attendance</a>
 </body>
 
 </html>
