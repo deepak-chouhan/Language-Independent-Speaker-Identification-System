@@ -17,8 +17,7 @@ def my_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("/rec")
-            
+            return redirect("/dashboard")
         else:
             print("none")
     return render(request, "AudioProcessing/login.html")
