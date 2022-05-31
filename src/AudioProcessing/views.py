@@ -61,7 +61,7 @@ def dashboard(request):
         file_path = "filename.csv"
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + file_path
+            response['Content-Disposition'] = 'inline; filename=' + f"{batch}_{course}.csv"
             return response
 
     return render(request, "AudioProcessing/dashboard.html")
