@@ -81,7 +81,7 @@
 
 <body>
     <div class="main">
-        <form action="" method="post">
+        <form action="{% url 'dashboard' %}" method="POST">
             {% csrf_token %}
             <h3>Class Details</h3>
             <label for="batch">Batch</label>
@@ -97,6 +97,7 @@
                 <option value="pcd">PCD</option>
                 <option value="ai">AI</option>
                 <option value="dm">DM</option>
+                <option value="ml">ML</option>
             </select>
             <label for="date">Date</label>
             <input type="date" name="date" id="date" class="date box">

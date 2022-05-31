@@ -6,6 +6,7 @@ from .forms import *
 import base64
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+import csv
 
 from .helper import *
 
@@ -34,6 +35,27 @@ def record(request):
     return render(request, "AudioProcessing/index.html")
 
 def dashboard(request):
+    cur_user = request.user
+    if request.method == "POST":
+        course = request.POST["course"]
+        batch = request.POST["batch"]
+        date = request.POST["date"]
+
+        print(course,batch,date)
+        dates=Attendance.objects.filter(course=course.upper(),date=date, batch=batch.upper())
+        f = open("filename.csv", "w")
+        f.truncate()
+        writer = csv.writer(f)
+        head=[course.upper(),batch]
+        writer.writerow(head)
+        head2=['Name','roll','date']
+        writer.writerow(head2)
+        for i in dates:
+            date=[i.student_atnd.name, i.student_atnd.roll_no, i.date]
+            print(date)
+            writer.writerow(date)
+        f.close()
+            
     return render(request, "AudioProcessing/dashboard.html")
 
 @csrf_exempt
@@ -42,9 +64,9 @@ def save(request):
     if request.method == "POST":
 
         # details
-        # course = request.POST["course"]
-        # batch = request.POST["batch"]
-        # teacher = request.POST["teacher"]
+        course = request.POST["course"]
+        batch = request.POST["batch"]
+        teacher = request.POST["teacher"]
 
         # array of base64 string
         audio = request.POST["audio"]
@@ -58,15 +80,15 @@ def save(request):
         audio_file.write(audio_data)
 
         # predicting student
-        res = predict_speaker(path)
-        print(res)
+        roll = predict_speaker(path)
+        print(roll)
 
-        # student = Student.objects.filter(roll_no=roll)
-        # print(student)
-        # attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=str(teacher), course=course)
-        # attendence_obj.save()
+        student = Student.objects.filter(roll_no=roll[0])
+        print(student)
+        attendence_obj = Attendance.objects.create(student_atnd=student[0], teacher=str(teacher), course=course, batch=batch.upper())
+        attendence_obj.save()
 
-        return JsonResponse({"response": "Attendence Marked", "res": str(res[0])})
+        return JsonResponse({"response": "Attendence Marked", "res": str(roll[0])})
 
 @csrf_exempt          
 def Student_reg(request):

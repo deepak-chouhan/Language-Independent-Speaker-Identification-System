@@ -14,6 +14,7 @@ class Audio(models.Model):
 class Attendance(models.Model):
     student_atnd = models.ForeignKey(Student, on_delete=models.CASCADE)
     date=models.DateTimeField(auto_now=True)
+    batch = models.CharField(null=False,default="", max_length=50)
     course=models.CharField(null=False, max_length=50)
     teacher=models.CharField(null=False, max_length=50)
     
