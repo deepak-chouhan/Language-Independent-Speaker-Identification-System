@@ -45,7 +45,6 @@ def dashboard(request):
         dates = Attendance.objects.filter(course=course, date__contains=date, batch=batch.upper())
         print(dates)
 
-
         file = open("filename.csv", "w")
         file.truncate()
         writer = csv.writer(file)
@@ -104,6 +103,8 @@ def Student_reg(request):
 
         # array of base64 string
         audios = request.POST.getlist("audio[]")
+
+        # Student Details
         name=(request.POST.getlist("name")[0])
         batch=request.POST.getlist("batch")[0]
         rollno=request.POST.getlist("roll_no")[0]
@@ -114,7 +115,6 @@ def Student_reg(request):
         for audio in audios:
 
             audio_data=base64.b64decode(audio)
-
             # saves the file in <student_id>__<roll_no>__<name>__<file_number>.mp3 format
             string1="newsrc/" + str(newstudent.id) + "__" + str(rollno)+ "__" + str(name) + "__" + str(i) + '.wav'
             i += 1

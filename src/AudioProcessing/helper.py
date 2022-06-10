@@ -8,8 +8,6 @@ import tensorflow as tf
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 
-from six.moves.urllib.request import urlopen
-
 
 def extract_feature(y, sr):
     mfccs_features = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
