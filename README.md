@@ -1,5 +1,7 @@
 # Language-Independent-Speaker-Identification-System
 
+!["attendance"](https://raw.githubusercontent.com/deepak-chouhan/Speaker-Identification-System/main/project_images/attendance.png)
+
 **NOTE**: You might get `No Backend Error` for some audio files when predicting results, to avoid that you need `ffmpeg` which u can install without hassle using ["imagemagic"](https://imagemagick.org/script/index.php). Just go to the link and install imagemagic and that's it.
 
 ## Goal
